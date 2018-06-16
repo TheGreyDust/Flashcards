@@ -1,4 +1,4 @@
-package com.example.fabiandrees.flashcards;
+package com.example.fabiandrees.screens;
 
 import org.junit.Test;
 

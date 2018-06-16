@@ -10,6 +10,11 @@
     <string name="nav_statistics_title">Statistiken</string>
     <string name="nav_settings_title">Einstellungen</string>
     <string name="nav_about_title">Über</string>
-    <string name="title_activity_new_card">new_card</string>
+    <string name="title_activity_new_card">Neue Karte</string>
+    <string name="title_activity_about">Über</string>
+    <string name="title_activity_settings">Einstellungen</string>
+    <string name="title_activity_statistics">Statistiken</string>
+    <string name="title_activity_card_administration">Karteikartenübersicht</string>
+    <string name="title_activity_random_selection">Zufällige Auswahl</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
 </resources>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.fabiandrees.flashcards">
+    package="com.example.fabiandrees.screens">
 
     <application
         android:allowBackup="true"
@@ -10,8 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".CardAdministration"
-            android:label="@string/app_name"
+            android:name="com.example.fabiandrees.screens.CardAdministration"
+            android:label="@string/title_activity_card_administration"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,13 +20,49 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".NewCard"
+            android:name="com.example.fabiandrees.screens.NewCard"
             android:label="@string/title_activity_new_card"
-            android:parentActivityName=".CardAdministration"
+            android:parentActivityName="com.example.fabiandrees.screens.CardAdministration"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.fabiandrees.flashcards.CardAdministration" />
+                android:value="com.example.fabiandrees.screens.CardAdministration" />
+        </activity>
+        <activity
+            android:name="com.example.fabiandrees.screens.RandomSelection"
+            android:label="@string/title_activity_random_selection"
+            android:parentActivityName="com.example.fabiandrees.screens.CardAdministration"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.fabiandrees.screens.CardAdministration" />
+        </activity>
+        <activity
+            android:name="com.example.fabiandrees.screens.About"
+            android:label="@string/title_activity_about"
+            android:parentActivityName="com.example.fabiandrees.screens.CardAdministration"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.fabiandrees.screens.CardAdministration" />
+        </activity>
+        <activity
+            android:name="com.example.fabiandrees.screens.Settings"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName="com.example.fabiandrees.screens.CardAdministration"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.fabiandrees.screens.CardAdministration" />
+        </activity>
+        <activity
+            android:name="com.example.fabiandrees.screens.Statistics"
+            android:label="@string/title_activity_statistics"
+            android:parentActivityName="com.example.fabiandrees.screens.CardAdministration"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.fabiandrees.screens.CardAdministration" />
         </activity>
     </application>
 

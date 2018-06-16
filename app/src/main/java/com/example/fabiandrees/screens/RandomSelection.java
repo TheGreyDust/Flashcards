@@ -1,10 +1,8 @@
-package com.example.fabiandrees.flashcards;
+package com.example.fabiandrees.screens;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -14,47 +12,35 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class CardAdministration extends AppCompatActivity
+import com.example.fabiandrees.listener.CardAddListener;
+
+public class RandomSelection extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    //TODO(Fabian): Das muss noch besser implementiert werden
-    public class Listener implements View.OnClickListener {
-        private CardAdministration cardAdministation;
-
-        public Listener(CardAdministration cardAdministation) {
-            this.cardAdministation = cardAdministation;
-        }
-
-        @Override
-        public void onClick(View view) {
-            Intent intent = new Intent(cardAdministation, NewCard.class);
-            startActivity(intent);
-        }
-    }
+    Toolbar toolbar;
+    DrawerLayout drawer;
+    NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_card_administration);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setContentView(R.layout.activity_random_selection);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new Listener(this));
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -65,11 +51,11 @@ public class CardAdministration extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.card_administration, menu);
+        getMenuInflater().inflate(R.menu.random_selection, menu);
         return true;
     }
 
-    @Override
+    /*@Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -82,29 +68,29 @@ public class CardAdministration extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
+    //TODO(Fabian): Logik für Navigationsleiste
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Intent intent;
 
         if (id == R.id.nav_card_administration) {
-            Intent intent = new Intent(this, CardAdministration.class);
+            intent = new Intent(this, CardAdministration.class);
             startActivity(intent);
-            //TODO(Fabian): Logik für Navigationsleiste
-        } else if (id == R.id.nav_random) {
-
         } else if (id == R.id.nav_statistics) {
-
+            intent = new Intent(this, Statistics.class);
+            startActivity(intent);
         } else if (id == R.id.nav_settings) {
-
+            intent = new Intent(this, Settings.class);
+            startActivity(intent);
         } else if (id == R.id.nav_about) {
-
+            intent = new Intent(this, About.class);
+            startActivity(intent);
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
