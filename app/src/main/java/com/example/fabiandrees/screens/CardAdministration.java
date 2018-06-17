@@ -12,6 +12,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.example.fabiandrees.listener.CardAddListener;
+import android.view.View;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
+import android.widget.Toast;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import com.example.fabiandrees.list.*;
+
 
 public class CardAdministration extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -20,6 +29,10 @@ public class CardAdministration extends AppCompatActivity
     DrawerLayout drawer;
     NavigationView navigationView;
     FloatingActionButton fab;
+    ExpandableListView expandableListView;
+    ExpandableListAdapter expandableListAdapter;
+    List<String> expandableListTitle;
+    HashMap<String, List<Flashcard>> expandableListDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +52,28 @@ public class CardAdministration extends AppCompatActivity
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
+        expandableListDetail = ExpandableListDataPump.getData();
+        expandableListTitle = new ArrayList<String>(expandableListDetail.keySet());
+        expandableListAdapter = new CustomExpandableListAdapter(this, expandableListTitle, expandableListDetail);
+        expandableListView.setAdapter(expandableListAdapter);
+
+        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v,
+                                        int groupPosition, int childPosition, long id) {
+                Toast.makeText(
+                        getApplicationContext(),
+                        expandableListTitle.get(groupPosition)
+                                + " -> "
+                                + expandableListDetail.get(
+                                expandableListTitle.get(groupPosition)).get(
+                                childPosition), Toast.LENGTH_SHORT
+                ).show();
+                return false;
+            }
+        });
     }
 
     @Override

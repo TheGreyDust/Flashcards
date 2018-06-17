@@ -1,28 +1,82 @@
 package com.example.fabiandrees.screens;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+import com.example.fabiandrees.list.ExpandableListDataPump;
+import com.example.fabiandrees.list.Flashcard;
 
 public class NewCard extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    Toolbar toolbar;
-    NavigationView navigationView;
+    private Toolbar toolbar;
+    private NavigationView navigationView;
+    private String selectedCategory;
+    private NewCard newCard = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_card);
+
+        //Anlegen der Toolbar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //Anlegen des Spinners und befüllen mit Daten aus der category_array.xml
+        Spinner spinner = (Spinner) findViewById(R.id.category_spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.category_array, android.R.layout.simple_spinner_item);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                selectedCategory = (String)adapterView.getItemAtPosition(i);
+
+                if(selectedCategory.equals("Neue Kategorie hinzufügen...")) {
+                    selectedCategory = "TestKategorieDialog";
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {}
+        });
+
+
+        //Anlegen des Buttons zum Speichern der neuen Karteikarte
+        Button addNewCardButton = (Button) findViewById(R.id.btn_save_new_card);
+        addNewCardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditText title = (EditText)findViewById(R.id.input_title);
+                EditText text = (EditText)findViewById(R.id.input_text);
+                if(title.getText() != null && text.getText() != null && selectedCategory != null) {
+                    ExpandableListDataPump.addData(selectedCategory,
+                            new Flashcard(selectedCategory, title.getText().toString(), text.getText().toString()));
+                } else if(title.getText() == null) {
+                    System.out.println("Title darf nicht null sein!");
+                } else if(text.getText() == null) {
+                    System.out.println("Text darf nicht null sein!");
+                }
+                Intent intent = new Intent(newCard, CardAdministration.class);
+                startActivity(intent);
+                toolbar.getLogo();
+            }
+        });
     }
 
     @Override
