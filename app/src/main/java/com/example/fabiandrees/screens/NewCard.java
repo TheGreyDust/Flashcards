@@ -27,7 +27,6 @@ public class NewCard extends AppCompatActivity
     private Toolbar toolbar;
     private NavigationView navigationView;
     private String selectedCategory;
-    private NewCard newCard = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +46,13 @@ public class NewCard extends AppCompatActivity
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 selectedCategory = (String)adapterView.getItemAtPosition(i);
 
-                if(selectedCategory.equals("Neue Kategorie hinzufügen...")) {
-                    selectedCategory = "TestKategorieDialog";
+                if(selectedCategory.equals("Neue Kategorie...")) {
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(NewCard.this);
+                    builder.setMessage("test")
+                            .setTitle("test");
+                    AlertDialog newCategoryDialog = builder.create();
+                    newCategoryDialog.show();
                 }
             }
 
@@ -72,7 +76,7 @@ public class NewCard extends AppCompatActivity
                 } else if(text.getText() == null) {
                     System.out.println("Text darf nicht null sein!");
                 }
-                Intent intent = new Intent(newCard, CardAdministration.class);
+                Intent intent = new Intent(NewCard.this, CardAdministration.class);
                 startActivity(intent);
                 toolbar.getLogo();
             }
