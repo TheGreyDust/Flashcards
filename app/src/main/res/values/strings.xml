@@ -26,6 +26,7 @@
     <string name="cancel">Abbrechen</string>
 
     <string-array name="category_array">
+        <item>"Kategorie wählen..."</item>
         <item>"Neue Kategorie..."</item>
     </string-array>
 </resources>

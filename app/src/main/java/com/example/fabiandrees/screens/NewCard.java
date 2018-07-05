@@ -41,13 +41,27 @@ public class NewCard extends AppCompatActivity
         Spinner spinner = (Spinner) findViewById(R.id.category_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.category_array, android.R.layout.simple_spinner_item);
+        /*spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                selectedCategory = (String)adapterView.getItemAtPosition(i);
+
+                if(selectedCategory.equals("Neue Kategorie...")) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(NewCard.this);
+                    builder.setMessage("test")
+                            .setTitle("test");
+                    AlertDialog newCategoryDialog = builder.create();
+                    newCategoryDialog.show();
+                }
+            }
+        });
+        */
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 selectedCategory = (String)adapterView.getItemAtPosition(i);
 
                 if(selectedCategory.equals("Neue Kategorie...")) {
-
                     AlertDialog.Builder builder = new AlertDialog.Builder(NewCard.this);
                     builder.setMessage("test")
                             .setTitle("test");
@@ -59,7 +73,6 @@ public class NewCard extends AppCompatActivity
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {}
         });
-
 
         //Anlegen des Buttons zum Speichern der neuen Karteikarte
         Button addNewCardButton = (Button) findViewById(R.id.btn_save_new_card);
