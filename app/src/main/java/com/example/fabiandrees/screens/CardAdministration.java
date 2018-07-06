@@ -11,18 +11,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import com.example.fabiandrees.listener.CardAddListener;
 import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import com.example.fabiandrees.list.*;
+
+import com.example.fabiandrees.list.ExpandableListDataPump;
+import com.example.fabiandrees.listener.CardAddListener;
 import com.example.fabiandrees.model.Category;
 import com.example.fabiandrees.model.CustomExpandableListAdapter;
-import com.example.fabiandrees.model.Flashcard;
+import com.example.fabiandrees.util.PersistenceManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class CardAdministration extends AppCompatActivity
@@ -40,6 +41,10 @@ public class CardAdministration extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ExpandableListDataPump.setCategoryList(PersistenceManager.open(getFilesDir()));
+
+
         setContentView(R.layout.activity_card_administration);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

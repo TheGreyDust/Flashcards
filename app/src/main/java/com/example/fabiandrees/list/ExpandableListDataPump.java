@@ -4,8 +4,6 @@ import com.example.fabiandrees.model.Category;
 import com.example.fabiandrees.model.Flashcard;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class ExpandableListDataPump {
     private static ArrayList<Category> categoryList = new ArrayList<>();
@@ -21,6 +19,10 @@ public class ExpandableListDataPump {
         Category category = new Category(topic);
         category.addCard(card);
         categoryList.add(category);
+    }
+
+    public static void setCategoryList(ArrayList<Category> list) {
+        categoryList = list;
     }
 
     public static ArrayList<Category> getData() {

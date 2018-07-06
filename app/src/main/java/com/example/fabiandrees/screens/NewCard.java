@@ -20,6 +20,7 @@ import android.widget.Spinner;
 import com.example.fabiandrees.list.ExpandableListDataPump;
 import com.example.fabiandrees.model.Category;
 import com.example.fabiandrees.model.Flashcard;
+import com.example.fabiandrees.util.PersistenceManager;
 
 import java.util.ArrayList;
 
@@ -107,6 +108,10 @@ public class NewCard extends AppCompatActivity
                             .setTitle("Keine Kategorie ausgewählt!");
                     AlertDialog newCategoryDialog = builder.create();
                     newCategoryDialog.show();
+                    Flashcard card = new Flashcard(selectedCategory, title.getText().toString(), text.getText().toString());
+                    ExpandableListDataPump.addData(selectedCategory,
+                            card);
+                    PersistenceManager.persist(card, getFilesDir());
                 } else if(title.getText() == null) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(NewCard.this);
                     builder.setMessage("Bitte geben Sie einen Titel ein!")
