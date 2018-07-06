@@ -1,9 +1,12 @@
 package com.example.fabiandrees.screens;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,6 +16,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.fabiandrees.listener.CardAddListener;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.utils.ColorTemplate;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Statistics extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -20,6 +33,8 @@ public class Statistics extends AppCompatActivity
     Toolbar toolbar;
     DrawerLayout drawer;
     NavigationView navigationView;
+    PieChart pieChart;
+    List<PieEntry> entries = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +51,32 @@ public class Statistics extends AppCompatActivity
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //PieChart
+        pieChart = (PieChart) findViewById(R.id.idPieChart);
+        pieChart.getDescription().setEnabled(false);
+        pieChart.setTransparentCircleRadius(35f);
+        pieChart.setHoleRadius(30f);
+        pieChart.animateY(500);
+
+        //TODO: Je nach Kategorie die Anzahl der richtigen/falschen Antworten auslesen -> Verhältnis berechnen -> in Entries setzen
+        entries.add(new PieEntry(70.0f, "Richtig"));
+        entries.add(new PieEntry(30.0f, "Falsch"));
+
+        PieDataSet dataSet = new PieDataSet(entries,"");
+
+        dataSet.setColors(new int[] {R.color.green, R.color.red}, getApplicationContext());
+
+        dataSet.setValueTextSize(13f);
+
+        Legend legend = pieChart.getLegend();
+        legend.setTextSize(14f);
+
+        PieData data = new PieData(dataSet);
+        data.setValueFormatter(new PercentFormatter());
+
+        pieChart.setData(data);
+        pieChart.invalidate();
     }
 
     @Override
