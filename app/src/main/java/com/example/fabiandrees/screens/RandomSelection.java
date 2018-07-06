@@ -39,8 +39,11 @@ public class RandomSelection extends AppCompatActivity
         setContentView(R.layout.activity_random_selection);
 
         if(cards.size()<=0) {
-            if (getIntent().getExtras() == null || getIntent().getExtras().get("topic") == null)
-                ExpandableListDataPump.getData().values().forEach(v -> cards.addAll(v));
+            if (getIntent().getExtras() == null || getIntent().getExtras().get("topic") == null){
+                for (List l : ExpandableListDataPump.getData().values()) {
+                    cards.addAll(l);
+                }
+            }
             else
                 cards.addAll(ExpandableListDataPump.getData().get(getIntent().getExtras().get("topic")));
         }
