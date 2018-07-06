@@ -12,11 +12,13 @@
     tools:context=".RandomSelection"
     tools:showIn="@layout/app_bar_card_answer">
 
-
     <TextView
         android:id="@+id/textview_prompt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:layout_marginBottom="5dp"
         android:layout_above="@+id/line"
         android:text="TextView" />
 
@@ -25,35 +27,42 @@
         android:layout_width="fill_parent"
         android:layout_height="2dp"
         android:background="#000000"
+        android:layout_marginBottom="5dp"
         tools:layout_above="@+id/textView_answer" />
 
     <TextView
         android:id="@+id/textView_answer"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:layout_marginBottom="5dp"
         android:text="TextView" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_gravity="bottom">
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:gravity="center|bottom"
+        android:orientation="horizontal" >
 
         <ImageButton
             android:id="@+id/btn_wrong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxHeight="100px"
-            android:maxWidth="100px"
+            android:minHeight="100dp"
+            android:minWidth="100dp"
+            android:layout_gravity="center_horizontal|bottom"
             android:src="@drawable/cross_icon" />
 
         <ImageButton
             android:id="@+id/btn_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/checkmark_icon"
-            />
-
+            android:minHeight="100dp"
+            android:minWidth="100dp"
+            android:layout_gravity="center_horizontal|bottom"
+            android:src="@drawable/checkmark_icon" />
     </LinearLayout>
 
 

@@ -15,6 +15,8 @@ public class CardAddListener<T extends AppCompatActivity> implements View.OnClic
     @Override
     public void onClick(View view) {
         Intent intent = new Intent(appCompatActivity, NewCard.class);
+        int[] test = null;
+        intent.putExtra("EditCard", test);
         appCompatActivity.startActivity(intent);
     }
 }

@@ -69,13 +69,13 @@ public class CardAdministration extends AppCompatActivity
             @Override
             public boolean onChildClick(ExpandableListView parent, View v,
                                         int groupPosition, int childPosition, long id) {
-                Toast.makeText(
-                        getApplicationContext(),
-                        expandableListTitle.get(groupPosition)
-                                + " -> "
-                                + categories.get(groupPosition).getCards().get(
-                                childPosition), Toast.LENGTH_SHORT
-                ).show();
+                Flashcard card = categories.get(groupPosition).getCards().get(childPosition);
+                Intent intent = new Intent(CardAdministration.this, NewCard.class);
+                int[] positions = {groupPosition, childPosition};
+                intent.putExtra("EditCard", positions);
+                CardAdministration.this.startActivity(intent);
+
+
                 return false;
             }
         });

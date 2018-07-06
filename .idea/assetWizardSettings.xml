@@ -16,11 +16,25 @@
                             <entry key="actionbar">
                               <value>
                                 <PersistentState>
+                                  <option name="children">
+                                    <map>
+                                      <entry key="clipartAsset">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_highlight_off_black_24dp.xml" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
+                                    </map>
+                                  </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="$USER_HOME$/Downloads/info-symbol-300.png" />
-                                      <entry key="outputName" value="ic_about" />
+                                      <entry key="imageAsset" value="C:\Users\Fabian Drees\Downloads\info-symbol-300.png" />
+                                      <entry key="outputName" value="cross_icon" />
                                       <entry key="theme" value="CUSTOM" />
                                       <entry key="themeColor" value="000000" />
                                     </map>
@@ -62,7 +76,7 @@
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
                                       <entry key="backgroundColor" value="98a676" />
-                                      <entry key="foregroundImage" value="$USER_HOME$/Downloads/1492790910-94list_84237.png" />
+                                      <entry key="foregroundImage" value="C:\Users\Fabian Drees\Downloads\1492790910-94list_84237.png" />
                                       <entry key="showSafeZone" value="false" />
                                     </map>
                                   </option>
