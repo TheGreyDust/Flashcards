@@ -126,10 +126,10 @@ public class CardAdministration extends AppCompatActivity
         } else if (id == R.id.nav_statistics) {
             intent = new Intent(this, Statistics.class);
             startActivity(intent);
-        } else if (id == R.id.nav_settings) {
+        } /*else if (id == R.id.nav_settings) {
             intent = new Intent(this, Settings.class);
             startActivity(intent);
-        } else if (id == R.id.nav_about) {
+        } */ else if (id == R.id.nav_about) {
             intent = new Intent(this, About.class);
             startActivity(intent);
         }

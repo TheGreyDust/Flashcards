@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.fabiandrees.listener.CardAddListener;
 
@@ -36,6 +37,11 @@ public class About extends AppCompatActivity
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        TextView aboutText = (TextView) findViewById(R.id.aboutText);
+        aboutText.setText("Flashcards:\n" +
+                          "Karteikarten-App entwickelt für die Veranstaltung Mobile App Engineering!\n" +
+                          "Gruppe: MIA");
     }
 
     @Override
@@ -86,10 +92,10 @@ public class About extends AppCompatActivity
         } else if (id == R.id.nav_statistics) {
             intent = new Intent(this, Statistics.class);
             startActivity(intent);
-        } else if (id == R.id.nav_settings) {
+        } /*else if (id == R.id.nav_settings) {
             intent = new Intent(this, Settings.class);
             startActivity(intent);
-        }
+        } */
 
         drawer.closeDrawer(GravityCompat.START);
         return true;

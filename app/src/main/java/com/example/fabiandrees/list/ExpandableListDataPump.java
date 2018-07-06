@@ -53,4 +53,26 @@ public class ExpandableListDataPump {
 
         return cards;
     }
+
+    public static void setCardCorrect(Flashcard card, boolean isCorrect) {
+        for(Category category : categoryList) {
+            for(Flashcard originalCard : category.getCards()) {
+                if(originalCard.equals(card)) {
+                    if(isCorrect)  originalCard.incrementLevel();
+                    else originalCard.decrementLevel();
+                    originalCard.setAnsweredCorrectly(isCorrect);
+                }
+            }
+        }
+    }
+
+    public static void setCardViewed(Flashcard card) {
+        for(Category category : categoryList) {
+            for(Flashcard originalCard : category.getCards()) {
+                if(originalCard.equals(card)) {
+                    originalCard.setWasViewed(true);
+                }
+            }
+        }
+    }
 }
