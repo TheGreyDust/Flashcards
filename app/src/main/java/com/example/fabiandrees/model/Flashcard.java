@@ -8,12 +8,14 @@ public class Flashcard implements Serializable {
     private String title;
     private boolean answeredCorrectly;
     private int level;
+    private boolean wasViewed;
 
     public Flashcard(String topic, String title, String text) {
         this.topic = topic;
         this.title = title;
         this.text = text;
         this.level = 0;
+        this.wasViewed = answeredCorrectly = false;
     }
 
     public String getTopic() {
@@ -41,11 +43,11 @@ public class Flashcard implements Serializable {
     }
 
     public boolean getAnsweredCorrectly() {
-        return answeredCorrectly;
+        return this.answeredCorrectly;
     }
 
     public void setAnsweredCorrectly(boolean answeredCorrectly) {
-        answeredCorrectly = answeredCorrectly;
+        this.answeredCorrectly = answeredCorrectly;
     }
 
     public int getLevel() { return level; }
@@ -55,4 +57,17 @@ public class Flashcard implements Serializable {
     public void incrementLevel(){ level++; }
 
     public void decrementLevel(){ level--; }
+
+    public boolean equals(Flashcard card) {
+        if(topic.equals(card.getTopic()) && title.equals(card.getTitle())) return true;
+        return false;
+    }
+
+    public void setWasViewed(boolean wasViewed) {
+        this.wasViewed = wasViewed;
+    }
+
+    public boolean wasViewed() {
+        return this.wasViewed;
+    }
 }

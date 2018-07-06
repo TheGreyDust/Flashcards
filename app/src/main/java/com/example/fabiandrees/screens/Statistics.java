@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.fabiandrees.list.ExpandableListDataPump;
 import com.example.fabiandrees.listener.CardAddListener;
@@ -65,6 +66,9 @@ public class Statistics extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        TextView numberViewed = (TextView) findViewById(R.id.textView_num_of_viewed);
+        TextView numberOfCards = (TextView) findViewById(R.id.textView_num_of_cards);
+
         //PieChart
         pieChart = (PieChart) findViewById(R.id.idPieChart);
         pieChart.getDescription().setEnabled(false);
@@ -80,6 +84,10 @@ public class Statistics extends AppCompatActivity
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Category selectedCategory = ExpandableListDataPump
                         .getCategoryByName((String)adapterView.getItemAtPosition(i));
+
+                numberOfCards.setText("Anzahl Karten: " + selectedCategory.getCards().size());
+                numberViewed.setText("Angesehen: " + selectedCategory.getNumberViewed());
+
                 float correctPercentage = selectedCategory.calculatePercentageCorrect();
                 entries.clear();
                 entries.add(new PieEntry(correctPercentage, "Richtig"));
@@ -152,10 +160,10 @@ public class Statistics extends AppCompatActivity
         } else if (id == R.id.nav_random) {
             intent = new Intent(this, RandomSelection.class);
             startActivity(intent);
-        } else if (id == R.id.nav_settings) {
+        } /*else if (id == R.id.nav_settings) {
             intent = new Intent(this, Settings.class);
             startActivity(intent);
-        } else if (id == R.id.nav_about) {
+        } */ else if (id == R.id.nav_about) {
             intent = new Intent(this, About.class);
             startActivity(intent);
         }

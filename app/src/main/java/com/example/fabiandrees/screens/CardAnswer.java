@@ -64,8 +64,8 @@ public class CardAnswer extends AppCompatActivity implements NavigationView.OnNa
         wrongButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                card.decrementLevel();
-                card.setAnsweredCorrectly(false);
+                ExpandableListDataPump.setCardCorrect(card, false);
+                ExpandableListDataPump.setCardViewed(card);
                 Intent intent = new Intent(CardAnswer.this, RandomSelection.class);
                 startActivity(intent);
             }
@@ -76,8 +76,8 @@ public class CardAnswer extends AppCompatActivity implements NavigationView.OnNa
         rightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                card.incrementLevel();
-                card.setAnsweredCorrectly(true);
+                ExpandableListDataPump.setCardCorrect(card, true);
+                ExpandableListDataPump.setCardViewed(card);
                 Intent intent = new Intent(CardAnswer.this, RandomSelection.class);
                 startActivity(intent);
             }

@@ -32,10 +32,18 @@ public class Category {
         return (getAnsweredCorrectlyCount() / cards.size()) * 100;
     }
 
-    private int getAnsweredCorrectlyCount() {
-        int count = 0;
+    private float getAnsweredCorrectlyCount() {
+        float count = 0;
         for(Flashcard card : cards) {
             if(card.getAnsweredCorrectly() == true) count++;
+        }
+        return count;
+    }
+
+    public int getNumberViewed() {
+        int count = 0;
+        for(Flashcard card : cards) {
+            if(card.wasViewed() == true) count++;
         }
         return count;
     }

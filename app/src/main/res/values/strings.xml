@@ -14,7 +14,7 @@
     <string name="title_activity_about">Über</string>
     <string name="title_activity_settings">Einstellungen</string>
     <string name="title_activity_statistics">Statistiken</string>
-    <string name="title_activity_card_administration">Karteikartenübersicht</string>
+    <string name="title_activity_card_administration">Flashcards</string>
     <string name="title_activity_random_selection">Zufällige Auswahl</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="new_category_item">Neue Kategorie hinzufügen...</string>
