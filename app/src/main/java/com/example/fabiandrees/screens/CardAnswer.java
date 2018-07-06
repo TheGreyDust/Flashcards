@@ -14,7 +14,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.fabiandrees.list.ExpandableListDataPump;
-import com.example.fabiandrees.list.Flashcard;
+import com.example.fabiandrees.model.Flashcard;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +65,7 @@ public class CardAnswer extends AppCompatActivity implements NavigationView.OnNa
             @Override
             public void onClick(View view) {
                 card.decrementLevel();
+                card.setAnsweredCorrectly(false);
                 Intent intent = new Intent(CardAnswer.this, RandomSelection.class);
                 startActivity(intent);
             }
@@ -76,6 +77,7 @@ public class CardAnswer extends AppCompatActivity implements NavigationView.OnNa
             @Override
             public void onClick(View view) {
                 card.incrementLevel();
+                card.setAnsweredCorrectly(true);
                 Intent intent = new Intent(CardAnswer.this, RandomSelection.class);
                 startActivity(intent);
             }

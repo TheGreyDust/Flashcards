@@ -16,7 +16,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.fabiandrees.list.ExpandableListDataPump;
-import com.example.fabiandrees.list.Flashcard;
+import com.example.fabiandrees.model.Flashcard;
 import com.example.fabiandrees.listener.CardAddListener;
 
 import java.util.ArrayList;
@@ -40,12 +40,10 @@ public class RandomSelection extends AppCompatActivity
 
         if(cards.size()<=0) {
             if (getIntent().getExtras() == null || getIntent().getExtras().get("topic") == null){
-                for (List l : ExpandableListDataPump.getData().values()) {
-                    cards.addAll(l);
-                }
+                cards = ExpandableListDataPump.getAllCards();
             }
-            else
-                cards.addAll(ExpandableListDataPump.getData().get(getIntent().getExtras().get("topic")));
+            //else
+                //cards.addAll(ExpandableListDataPump.getData().get(getIntent().getExtras().get("topic")));
         }
 
         if(cards.size()<=0){

@@ -1,5 +1,6 @@
-package com.example.fabiandrees.screens;
+package com.example.fabiandrees.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import android.content.Context;
@@ -10,24 +11,24 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 import com.example.fabiandrees.model.Flashcard;
+import com.example.fabiandrees.screens.R;
 
 public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
 
     private Context context;
     private List<String> expandableListTitle;
-    private HashMap<String, List<Flashcard>> expandableListDetail;
+    private ArrayList<Category> categoryList;
 
     public CustomExpandableListAdapter(Context context, List<String> expandableListTitle,
-                                       HashMap<String, List<Flashcard>> expandableListDetail) {
+                                       ArrayList<Category> categoryList) {
         this.context = context;
         this.expandableListTitle = expandableListTitle;
-        this.expandableListDetail = expandableListDetail;
+        this.categoryList = categoryList;
     }
 
     @Override
     public Flashcard getChild(int listPosition, int expandedListPosition) {
-        return this.expandableListDetail.get(this.expandableListTitle.get(listPosition))
-                .get(expandedListPosition);
+        return this.categoryList.get(listPosition).getCards().get(expandedListPosition);
     }
 
     @Override
@@ -52,8 +53,7 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int listPosition) {
-        return this.expandableListDetail.get(this.expandableListTitle.get(listPosition))
-                .size();
+        return this.categoryList.get(listPosition).getCards().size();
     }
 
     @Override

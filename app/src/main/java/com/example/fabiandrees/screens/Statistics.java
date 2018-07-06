@@ -10,12 +10,19 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
+import com.example.fabiandrees.list.ExpandableListDataPump;
 import com.example.fabiandrees.listener.CardAddListener;
+import com.example.fabiandrees.model.Category;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
@@ -35,11 +42,17 @@ public class Statistics extends AppCompatActivity
     NavigationView navigationView;
     PieChart pieChart;
     List<PieEntry> entries = new ArrayList<>();
+    private Spinner categorySpinner;
+    private ArrayAdapter<String> categorySpinnerAdapter;
+    private ArrayList<String> categoryTitles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
+
+        categoryTitles = ExpandableListDataPump.categoryNamesToList();
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -59,24 +72,39 @@ public class Statistics extends AppCompatActivity
         pieChart.setHoleRadius(30f);
         pieChart.animateY(500);
 
-        //TODO: Je nach Kategorie die Anzahl der richtigen/falschen Antworten auslesen -> Verhältnis berechnen -> in Entries setzen
-        entries.add(new PieEntry(70.0f, "Richtig"));
-        entries.add(new PieEntry(30.0f, "Falsch"));
+        categorySpinner = (Spinner) findViewById(R.id.category_spinner);
+        categorySpinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categoryTitles);
+        categorySpinner.setAdapter(categorySpinnerAdapter);
+        categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Category selectedCategory = ExpandableListDataPump
+                        .getCategoryByName((String)adapterView.getItemAtPosition(i));
+                float correctPercentage = selectedCategory.calculatePercentageCorrect();
+                entries.clear();
+                entries.add(new PieEntry(correctPercentage, "Richtig"));
+                entries.add(new PieEntry(100.0f - correctPercentage, "Falsch"));
 
-        PieDataSet dataSet = new PieDataSet(entries,"");
 
-        dataSet.setColors(new int[] {R.color.green, R.color.red}, getApplicationContext());
+                PieDataSet dataSet = new PieDataSet(entries,"");
 
-        dataSet.setValueTextSize(13f);
+                dataSet.setColors(new int[] {R.color.green, R.color.red}, getApplicationContext());
 
-        Legend legend = pieChart.getLegend();
-        legend.setTextSize(14f);
+                dataSet.setValueTextSize(13f);
 
-        PieData data = new PieData(dataSet);
-        data.setValueFormatter(new PercentFormatter());
+                Legend legend = pieChart.getLegend();
+                legend.setTextSize(14f);
 
-        pieChart.setData(data);
-        pieChart.invalidate();
+                PieData data = new PieData(dataSet);
+                data.setValueFormatter(new PercentFormatter());
+
+                pieChart.setData(data);
+                pieChart.invalidate();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {}
+        });
     }
 
     @Override

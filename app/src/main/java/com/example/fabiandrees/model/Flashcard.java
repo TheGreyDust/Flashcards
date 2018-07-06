@@ -1,4 +1,4 @@
-package com.example.fabiandrees.list;
+package com.example.fabiandrees.model;
 
 import java.io.Serializable;
 
@@ -6,6 +6,7 @@ public class Flashcard implements Serializable {
     private String topic;
     private String text;
     private String title;
+    private boolean answeredCorrectly;
     private int level;
 
     public Flashcard(String topic, String title, String text) {
@@ -37,6 +38,14 @@ public class Flashcard implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public boolean getAnsweredCorrectly() {
+        return answeredCorrectly;
+    }
+
+    public void setAnsweredCorrectly(boolean answeredCorrectly) {
+        answeredCorrectly = answeredCorrectly;
     }
 
     public int getLevel() { return level; }

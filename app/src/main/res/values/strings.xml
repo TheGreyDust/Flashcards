@@ -26,10 +26,9 @@
     <string name="cancel">Abbrechen</string>
     <string name="num_of_cards">Anzahl Karten:</string>
     <string name="num_of_viewed">Angesehen:</string>
+    <string name="new_category">Neue Kategorie</string>
 
     <string-array name="category_array">
-        <item>"Kategorie wählen..."</item>
-        <item>"Neue Kategorie..."</item>
     </string-array>
 
 </resources>

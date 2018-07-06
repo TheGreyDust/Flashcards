@@ -20,6 +20,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import com.example.fabiandrees.list.*;
+import com.example.fabiandrees.model.Category;
+import com.example.fabiandrees.model.CustomExpandableListAdapter;
+import com.example.fabiandrees.model.Flashcard;
 
 
 public class CardAdministration extends AppCompatActivity
@@ -32,7 +35,7 @@ public class CardAdministration extends AppCompatActivity
     ExpandableListView expandableListView;
     ExpandableListAdapter expandableListAdapter;
     List<String> expandableListTitle;
-    HashMap<String, List<Flashcard>> expandableListDetail;
+    ArrayList<Category> categories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +57,12 @@ public class CardAdministration extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
-        expandableListDetail = ExpandableListDataPump.getData();
-        expandableListTitle = new ArrayList<String>(expandableListDetail.keySet());
-        expandableListAdapter = new CustomExpandableListAdapter(this, expandableListTitle, expandableListDetail);
+        categories = ExpandableListDataPump.getData();
+
+        ArrayList<String> categoryTitles = new ArrayList<>();
+        for(Category category : categories) categoryTitles.add(category.getCategoryName());
+        expandableListTitle = new ArrayList<String>(categoryTitles);
+        expandableListAdapter = new CustomExpandableListAdapter(this, expandableListTitle, categories);
         expandableListView.setAdapter(expandableListAdapter);
 
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
@@ -67,8 +73,7 @@ public class CardAdministration extends AppCompatActivity
                         getApplicationContext(),
                         expandableListTitle.get(groupPosition)
                                 + " -> "
-                                + expandableListDetail.get(
-                                expandableListTitle.get(groupPosition)).get(
+                                + categories.get(groupPosition).getCards().get(
                                 childPosition), Toast.LENGTH_SHORT
                 ).show();
                 return false;
