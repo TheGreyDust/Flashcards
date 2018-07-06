@@ -14,12 +14,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.Toast;
 
 import com.example.fabiandrees.list.ExpandableListDataPump;
 import com.example.fabiandrees.listener.CardAddListener;
 import com.example.fabiandrees.model.Category;
 import com.example.fabiandrees.model.CustomExpandableListAdapter;
+import com.example.fabiandrees.model.Flashcard;
 import com.example.fabiandrees.util.PersistenceManager;
 
 import java.util.ArrayList;

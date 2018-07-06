@@ -87,16 +87,18 @@ public class NewCard extends AppCompatActivity
             public void onClick(View view) {
                 EditText title = (EditText)findViewById(R.id.input_title);
                 EditText text = (EditText)findViewById(R.id.input_text);
+                Flashcard card = new Flashcard(selectedCategory, title.getText().toString(), text.getText().toString());
                 if(title.getText() != null && text.getText() != null && selectedCategory != null) {
                     if(positions != null) {
                         Category oldCategory  = ExpandableListDataPump.getData().get(positions[0]);
-                        Flashcard card = ExpandableListDataPump.getData().get(positions[0]).getCards().get(positions[1]);
+                        card = ExpandableListDataPump.getData().get(positions[0]).getCards().get(positions[1]);
                         card.setText(text.getText().toString());
                         card.setTitle(title.getText().toString());
                         if(!oldCategory.getCategoryName().equals(selectedCategory)) {
                             card.setTopic(selectedCategory);
                             oldCategory.removeCard(card);
                             ExpandableListDataPump.addData(selectedCategory, card);
+                            PersistenceManager.persist(card, getFilesDir());
                             if(oldCategory.getCards().size() == 0) ExpandableListDataPump.getData().remove(oldCategory);
                         }
                     }
@@ -108,7 +110,6 @@ public class NewCard extends AppCompatActivity
                             .setTitle("Keine Kategorie ausgewählt!");
                     AlertDialog newCategoryDialog = builder.create();
                     newCategoryDialog.show();
-                    Flashcard card = new Flashcard(selectedCategory, title.getText().toString(), text.getText().toString());
                     ExpandableListDataPump.addData(selectedCategory,
                             card);
                     PersistenceManager.persist(card, getFilesDir());
