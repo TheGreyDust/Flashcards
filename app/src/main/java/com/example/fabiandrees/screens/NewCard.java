@@ -58,6 +58,19 @@ public class NewCard extends AppCompatActivity
             public void onNothingSelected(AdapterView<?> adapterView) {}
         });
 
+        int[] positions = this.getIntent().getExtras().getIntArray("EditCard");
+        if(positions != null) {
+            categorySpinner.setSelection(positions[0]);
+
+            EditText title = (EditText) findViewById(R.id.input_title);
+            title.getText().clear();
+            title.getText().append(ExpandableListDataPump.getData().get(positions[0]).getCards().get(positions[1]).getTitle());
+
+            EditText text = (EditText) findViewById(R.id.input_text);
+            text.getText().clear();
+            text.getText().append(ExpandableListDataPump.getData().get(positions[0]).getCards().get(positions[1]).getText());
+        }
+
         Button newCategoryButton = (Button) findViewById(R.id.btn_new_category);
         newCategoryButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +87,26 @@ public class NewCard extends AppCompatActivity
                 EditText title = (EditText)findViewById(R.id.input_title);
                 EditText text = (EditText)findViewById(R.id.input_text);
                 if(title.getText() != null && text.getText() != null && selectedCategory != null) {
+                    if(positions != null) {
+                        Category oldCategory  = ExpandableListDataPump.getData().get(positions[0]);
+                        Flashcard card = ExpandableListDataPump.getData().get(positions[0]).getCards().get(positions[1]);
+                        card.setText(text.getText().toString());
+                        card.setTitle(title.getText().toString());
+                        if(!oldCategory.getCategoryName().equals(selectedCategory)) {
+                            card.setTopic(selectedCategory);
+                            oldCategory.removeCard(card);
+                            ExpandableListDataPump.addData(selectedCategory, card);
+                            if(oldCategory.getCards().size() == 0) ExpandableListDataPump.getData().remove(oldCategory);
+                        }
+                    }
+                    else ExpandableListDataPump.addData(selectedCategory,
+                            new Flashcard(selectedCategory, title.getText().toString(), text.getText().toString()));
+                } else if(selectedCategory == null) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(NewCard.this);
+                    builder.setMessage("Bitte wähle eine Kategorie aus!")
+                            .setTitle("Keine Kategorie ausgewählt!");
+                    AlertDialog newCategoryDialog = builder.create();
+                    newCategoryDialog.show();
                     if(selectedCategory == null) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(NewCard.this);
                         builder.setMessage("Bitte wähle eine Kategorie aus!")
