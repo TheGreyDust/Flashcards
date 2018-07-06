@@ -11,8 +11,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
+import com.example.fabiandrees.list.ExpandableListDataPump;
+import com.example.fabiandrees.list.Flashcard;
 import com.example.fabiandrees.listener.CardAddListener;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class RandomSelection extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -21,21 +30,61 @@ public class RandomSelection extends AppCompatActivity
     DrawerLayout drawer;
     NavigationView navigationView;
 
+    Random random = new Random();
+    private List<Flashcard> cards = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_random_selection);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+        if(cards.size()<=0) {
+            if (getIntent().getExtras() == null || getIntent().getExtras().get("topic") == null){
+                for (List l : ExpandableListDataPump.getData().values()) {
+                    cards.addAll(l);
+                }
+            }
+            else
+                cards.addAll(ExpandableListDataPump.getData().get(getIntent().getExtras().get("topic")));
+        }
 
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        if(cards.size()<=0){
+            startActivity(new Intent(RandomSelection.this, CardAdministration.class));
+        }
+        else {
+            int index = random.nextInt(cards.size());
+
+            //Anlegen der Toolbar
+            toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+
+            drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+            drawer.addDrawerListener(toggle);
+            toggle.syncState();
+
+            navigationView = (NavigationView) findViewById(R.id.nav_view);
+            navigationView.setNavigationItemSelectedListener(this);
+
+            //Anlegen und Befüllen des Fragetexts
+            TextView textView = (TextView) findViewById(R.id.textview_prompt);
+            textView.setText(cards.get(index).getTitle());
+
+            //Anlegen des "Weiter"-Buttons
+            ImageButton showAnswerButton = (ImageButton) findViewById(R.id.btn_show_answer);
+            showAnswerButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(RandomSelection.this, CardAnswer.class);
+                    Bundle b = new Bundle();
+                    b.putSerializable("card", cards.get(index));
+                    intent.putExtras(b);
+                    cards.remove(index);
+                    startActivity(intent);
+                }
+            });
+        }
     }
 
     @Override

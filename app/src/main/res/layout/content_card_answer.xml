@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="20dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".RandomSelection"
+    tools:showIn="@layout/app_bar_card_answer">
+
+
+    <TextView
+        android:id="@+id/textview_prompt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/line"
+        android:text="TextView" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="#000000"
+        tools:layout_above="@+id/textView_answer" />
+
+    <TextView
+        android:id="@+id/textView_answer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom">
+
+        <ImageButton
+            android:id="@+id/btn_wrong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxHeight="100px"
+            android:maxWidth="100px"
+            android:src="@drawable/cross_icon" />
+
+        <ImageButton
+            android:id="@+id/btn_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/checkmark_icon"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>
