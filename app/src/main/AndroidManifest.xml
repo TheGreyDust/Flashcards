@@ -64,6 +64,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.fabiandrees.screens.CardAdministration" />
         </activity>
+        <activity
+            android:name="com.example.fabiandrees.screens.CardAnswer"
+            android:label="Antwort"
+            android:parentActivityName="com.example.fabiandrees.screens.CardAdministration"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.fabiandrees.screens.CardAdministration" />
+        </activity>
     </application>
 
 </manifest>
