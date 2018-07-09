@@ -1,7 +1,5 @@
 package com.example.fabiandrees.util;
 
-import android.os.Environment;
-
 import com.example.fabiandrees.model.Category;
 import com.example.fabiandrees.model.Flashcard;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -44,7 +42,7 @@ public class PersistenceManager {
             for (String topic : subdirs) {
                 Category category = new Category(topic);
                 try {
-                    String path = Environment.getDataDirectory() + File.separator
+                    String path = filesDir + File.separator
                             + "Flashcards" + File.separator + topic;
                     File subdir = new File(path);
                     String[] files = subdir.list();

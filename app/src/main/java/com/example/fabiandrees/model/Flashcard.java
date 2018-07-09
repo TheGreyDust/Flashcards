@@ -18,6 +18,8 @@ public class Flashcard implements Serializable {
         this.wasViewed = answeredCorrectly = false;
     }
 
+    public Flashcard(){ }
+
     public String getTopic() {
         return topic;
     }

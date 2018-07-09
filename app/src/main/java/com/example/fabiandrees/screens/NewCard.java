@@ -102,8 +102,11 @@ public class NewCard extends AppCompatActivity
                             if(oldCategory.getCards().size() == 0) ExpandableListDataPump.getData().remove(oldCategory);
                         }
                     }
-                    else ExpandableListDataPump.addData(selectedCategory, card);
-                    PersistenceManager.persist(card, getFilesDir());
+                    else{
+                        ExpandableListDataPump.addData(selectedCategory,
+                                card);
+                        PersistenceManager.persist(card, getFilesDir());
+                    }
                 } else if(selectedCategory == null) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(NewCard.this);
                     builder.setMessage("Bitte wähle eine Kategorie aus!")
