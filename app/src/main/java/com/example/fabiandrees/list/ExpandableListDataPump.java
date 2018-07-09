@@ -6,7 +6,7 @@ import com.example.fabiandrees.model.Flashcard;
 import java.util.ArrayList;
 
 public class ExpandableListDataPump {
-    private static ArrayList<Category> categoryList = new ArrayList<>();
+    private static ArrayList<Category> categoryList;
 
     public static void addData(String topic, Flashcard card) {
         for(Category category : categoryList) {
@@ -22,7 +22,8 @@ public class ExpandableListDataPump {
     }
 
     public static void setCategoryList(ArrayList<Category> list) {
-        categoryList = list;
+        if(list != null) categoryList = list;
+        else categoryList = new ArrayList<>();
     }
 
     public static ArrayList<Category> getData() {

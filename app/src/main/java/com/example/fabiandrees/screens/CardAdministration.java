@@ -42,7 +42,7 @@ public class CardAdministration extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ExpandableListDataPump.setCategoryList(PersistenceManager.open(getFilesDir()));
+        if(ExpandableListDataPump.getData() == null) ExpandableListDataPump.setCategoryList(PersistenceManager.open(getFilesDir()));
 
 
         setContentView(R.layout.activity_card_administration);
